@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Staging Tool</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the CSS file -->
+    <script src="script.js" defer></script> <!-- Link to the JavaScript file -->
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>Home Staging Tool</h1>
+            <p>Upload your photo, brush the areas to remove, and visualize staged homes.</p>
+            <p>Steps:</p>
+            <ul>
+                <li>Click "Browse Image" to upload an image.</li>
+                <li>Adjust the brush size using the slider below the canvas.</li>
+                <li>Brush over areas you want to remove.</li>
+                <li>Click "Remove Object" to process the image.</li>
+                <li>Use "Undo" to revert the last brush stroke or "Clear" to reset.</li>
+            </ul>
+        </header>
+        <input type="file" id="testFileInput" accept="image/*" style="display: none;">
+        <script src="script.js" defer></script>
+
+        <script>
+            document.getElementById('browseButton').addEventListener('click', () => {
+                document.getElementById('testFileInput').click();
+            });
+            document.getElementById('testFileInput').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                console.log('File selected via inline input:', file ? file.name : 'No file selected');
+            });
+        </script>
+        
+        <!-- Main Content -->
+        <main>
+            <!-- Browse Button -->
+            <button id="browseButton" class="button primary">Browse Image</button>
+
+            <!-- Canvas for Image Editing -->
+            <div class="canvas-container">
+                <canvas id="imageCanvas"></canvas>
+                <div id="brushPreview"></div>
+            </div>
+
+            <!-- Slider for Brush Size -->
+            <div class="brush-controls">
+                <label for="brushSize">Brush Size:</label>
+                <input type="range" id="brushSize" min="5" max="50" value="20">
+                <span id="brushSizeValue">20</span>
+            </div>
+
+            <!-- Controls Section -->
+            <div class="controls">
+                <button id="removeObject" class="button primary">Remove Object</button>
+                <button id="undoAction" class="button secondary">Undo</button>
+                <button id="clearSelection" class="button secondary">Clear</button>
+            </div>
+
+            <!-- Debug Section -->
+            <div id="debug-images">
+                <h3>Debug Images</h3>
+                <img id="debug-original-image" alt="Original Image" />
+                <img id="debug-mask-image" alt="Mask Image" />
+            </div>
+        </main>
+
+        <!-- Footer Section -->
+        <footer>
+            <p>&copy; 2024 Home Staging Tool. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
